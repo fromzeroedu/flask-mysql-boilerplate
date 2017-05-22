@@ -1,0 +1,8 @@
+export PORT=5000
+export SECRET_KEY='you-will-never-guess'
+export DEBUG=True
+export DB_USERNAME=counter_user
+export DB_PASSWORD=counter_password
+export DB_HOST=localhost
+export DATABASE_NAME=counter
+export MYSQL_ROOT_PASSWORD=rootpass
