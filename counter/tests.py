@@ -1,7 +1,7 @@
 import os
 from application import create_app as create_app_base
 import unittest
-from flask.ext.sqlalchemy import sqlalchemy
+from flask_sqlalchemy import sqlalchemy
 
 from counter.models import Counter
 from settings import DB_HOST
