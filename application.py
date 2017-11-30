@@ -20,8 +20,10 @@ def create_app(**config_overrides):
 
     # import blueprints
     from counter.views import counter_app
+    from landing.views import landing_app
 
     # register blueprints
     app.register_blueprint(counter_app)
+    app.register_blueprint(landing_app)
 
     return app

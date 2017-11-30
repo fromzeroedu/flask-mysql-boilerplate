@@ -1,0 +1,15 @@
+body {
+    background-color: #262626;
+}
+
+.logons {
+    margin-top: 70px;
+    width: 600px;
+    border: 0px solid transparent;
+    border-radius: 0px;
+}
+
+.bright-text {
+  color:#bcbcbc;
+  font:14px Helvetica,Verdana sans-serif;
+}
