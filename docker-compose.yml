@@ -11,9 +11,13 @@ services:
     container_name: counterappmysql_web_1
     depends_on:
       - db
+    stdin_open: true
+    tty: true
     environment:
         PORT: 5000
         SECRET_KEY: 'you-will-never-guess'
+        DEBUG: 1 # can't pass True here, but 1 works
+        MYSQL_ROOT_PASSWORD: rootpass
         DB_USERNAME: counter_user
         DB_PASSWORD: counter_password
         DB_HOST: mysql
@@ -22,6 +26,8 @@ services:
     image: mysql:5.7
     restart: always
     container_name: counterappmysql_db_1
+    ports:
+      - "3306:3306"
     environment:
         MYSQL_USER: counter_user
         MYSQL_PASSWORD: counter_password

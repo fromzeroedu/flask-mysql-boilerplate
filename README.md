@@ -18,11 +18,19 @@ Make sure you have `python3` installed.
     - Copy the contents of `envvars` file into your `~/.bashrc` or
     - You can also use [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
 - Quit your terminal and reopen, and do virtualenv activate again, so that envvars are loaded
-- Run `python manage.py db init` to create tables
-- Run `python manage.py db migrate` and `python manage.py db upgrade`
-- Run `gunicorn wsgi:app --bind 0.0.0.0:$PORT --reload`
+- Run `python manage.py db init` to initialize migrations
+- Run `python manage.py db migrate` and `python manage.py db upgrade` to create tables
+- Run `python manage.py runserver`
 - Open `http://localhost:5000` on your browser
 - Run tests by doing `python tests.py`
 
 ## Using Docker
--
+- Run `docker-compose up`
+- In a new terminal or tab run:
+    - `docker exec -it counterappmysql_web_1 python manage.py db init` to initialize migrations
+    - `docker exec -it counterappmysql_web_1 python manage.py db migrate` and `docker exec -it counterappmysql_web_1 python manage.py db upgrade` to create tables
+- Open `http://localhost:5000` on your browser
+- Run tests by doing `docker exec -it counterappmysql_web_1 python tests.py`
+
+## Production
+- Use Gunicorn `gunicorn wsgi:app --bind 0.0.0.0:$PORT --reload`
