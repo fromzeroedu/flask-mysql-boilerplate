@@ -2,10 +2,9 @@
 
 This is a boilerplate for a Flask app that can run as a virtualenv, Heroku or Docker application.
 
-Make sure you have `python3` installed.
+Make sure you have `python3` and `virtualenv` installed.
 
-## Local MySQL server using Homebrew
-- You can start and stop MySQL by doing `mysql.server start` and stopping with `mysql.server stop`.
+## Local MySQL server
 - Create the application user and password:
     - Logon to MySQL using root user
     - Create the counter database `CREATE DATABASE counter;`
