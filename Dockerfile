@@ -16,4 +16,4 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 # Define our command to be run when launching the container
-CMD gunicorn wsgi:app --workers 4 --timeout 120 --bind 0.0.0.0:$PORT --reload
+CMD gunicorn wsgi:app --bind 0.0.0.0:$PORT --reload
