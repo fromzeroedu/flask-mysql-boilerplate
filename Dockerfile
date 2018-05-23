@@ -16,4 +16,4 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 # Define our command to be run when launching the container
-CMD python manage.py runserver
+CMD flask run --host 0.0.0.0

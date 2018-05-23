@@ -2,6 +2,11 @@ import os
 from application import create_app as create_app_base
 import unittest
 from flask_sqlalchemy import sqlalchemy
+import pathlib
+
+from dotenv import load_dotenv
+env_dir = pathlib.Path(__file__).parents[1]
+load_dotenv(os.path.join(env_dir, '.flaskenv'))
 
 from counter.models import Counter
 from settings import DB_HOST
@@ -25,8 +30,8 @@ class CounterTest(unittest.TestCase):
         self.db_uri = 'mysql+pymysql://%s:%s@%s' % (self.db_username, self.db_password, DB_HOST)
         engine = sqlalchemy.create_engine(self.db_uri)
         conn = engine.connect()
-        conn.execute("commit")
-        conn.execute("create database "  + self.db_name)
+        conn.execute("COMMIT")
+        conn.execute("CREATE DATABASE "  + self.db_name)
         conn.close()
         self.app_factory = self.create_app()
         self.app = self.app_factory.test_client()
@@ -36,8 +41,8 @@ class CounterTest(unittest.TestCase):
     def tearDown(self):
         engine = sqlalchemy.create_engine(self.db_uri)
         conn = engine.connect()
-        conn.execute("commit")
-        conn.execute("drop database "  + self.db_name)
+        conn.execute("COMMIT")
+        conn.execute("DROP DATABASE "  + self.db_name)
         conn.close()
 
     def test_counter(self):
