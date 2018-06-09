@@ -23,7 +23,6 @@ class CounterTest(unittest.TestCase):
     def setUp(self):
         self.test_db = TestDB()
         self.db_uri = self.test_db.create_db()
-        import pdb; pdb.set_trace()
         self.app_factory = self.create_app()
         self.app = self.app_factory.test_client()
         with self.app_factory.app_context():
