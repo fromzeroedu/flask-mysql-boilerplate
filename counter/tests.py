@@ -1,7 +1,6 @@
 import os
 from application import create_app as create_app_base
 import unittest
-from flask_sqlalchemy import sqlalchemy
 import pathlib
 
 from dotenv import load_dotenv
@@ -9,41 +8,31 @@ env_dir = pathlib.Path(__file__).parents[1]
 load_dotenv(os.path.join(env_dir, '.flaskenv'))
 
 from counter.models import Counter
-from settings import DB_HOST
 from application import db
+from utils.test_db import TestDB
 
 class CounterTest(unittest.TestCase):
     def create_app(self):
         return create_app_base(
-            SQLALCHEMY_DATABASE_URI=self.db_uri + '/' + self.db_name,
+            SQLALCHEMY_DATABASE_URI=self.db_uri,
             TESTING=True,
             WTF_CSRF_ENABLED=False,
             SECRET_KEY = 'mySecret!'
         )
 
     def setUp(self):
-        # we need to use the root user
-        # to be able to create the new database
-        self.db_username = 'root'
-        self.db_password = os.environ['MYSQL_ROOT_PASSWORD']
-        self.db_name = os.environ['DATABASE_NAME'] + '_test'
-        self.db_uri = 'mysql+pymysql://%s:%s@%s' % (self.db_username, self.db_password, DB_HOST)
-        engine = sqlalchemy.create_engine(self.db_uri)
-        conn = engine.connect()
-        conn.execute("COMMIT")
-        conn.execute("CREATE DATABASE "  + self.db_name)
-        conn.close()
+        self.test_db = TestDB()
+        self.db_uri = self.test_db.create_db()
+        import pdb; pdb.set_trace()
         self.app_factory = self.create_app()
         self.app = self.app_factory.test_client()
         with self.app_factory.app_context():
             db.create_all()
 
     def tearDown(self):
-        engine = sqlalchemy.create_engine(self.db_uri)
-        conn = engine.connect()
-        conn.execute("COMMIT")
-        conn.execute("DROP DATABASE "  + self.db_name)
-        conn.close()
+        with self.app_factory.app_context():
+            db.drop_all()
+        self.test_db.drop_db()
 
     def test_counter(self):
         rv = self.app.get('/')
