@@ -1,6 +1,6 @@
 # Set the path
-import os, sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import sys, pathlib
+sys.path.append(pathlib.Path(__file__).parents[0])
 
 import unittest
 loader = unittest.TestLoader()
