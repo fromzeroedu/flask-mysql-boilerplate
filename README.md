@@ -15,7 +15,7 @@ Make sure you have `python 3.6` installed.
 - Install the packages: `pip install -r requirements.txt`
 - Run `flask db init` to initialize migrations
 - Run `flask db migrate` and `flask db upgrade` to create tables
-- Run `flask runserver`
+- Run `flask run`
 - Open `http://localhost:5000` on your browser
 - To open a shell, just do `flask shell`
 - Run tests by doing `python tests.py`
