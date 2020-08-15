@@ -1,4 +1,4 @@
-FROM python:3.4.5-slim
+FROM python:3.8-slim
 
 ## make a local directory
 RUN mkdir /counter_app
