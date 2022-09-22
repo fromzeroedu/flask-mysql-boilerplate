@@ -30,3 +30,10 @@ Make sure you have `python 3.6` installed.
 
 ## Production
 - Use Gunicorn `gunicorn wsgi:app --bind 0.0.0.0:$PORT --reload`
+
+##Codespaces
+
+-TODO
+
+## Vercel
+if you add any new package on Poetry, re-generate 'requirements.text' as follows: 'poetry export -f requirements.txt --output requirements.txt'
